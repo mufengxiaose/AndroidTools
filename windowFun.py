@@ -5,6 +5,7 @@ import subprocess
 import time
 import datetime
 
+
 class AndroidTools():
 
     def run_cmd(self, str):
@@ -44,14 +45,30 @@ class AndroidTools():
         # self.screenrecord = self.run_cmd("adb shell screenrecord ")
         pass
 
-    def screenshot(self):
+    def get_screenshot(self):
         '''截图'''
-        pass
+        p = "adb shell screencap -p /sdcard/" + self.get_current_time() + ".png"
+        file = "adb pull /sdcard/" + self.get_current_time() + ".png " + self.get_file_path() + "/Data\screenshot"
+        self.screenshot = self.run_cmd(p)
+        self.get_pic = self.run_cmd(file)
+
 
     def get_log(self):
         '''拉日志'''
         pass
 
+    def get_current_time(self):
+        '''获取当前时间'''
+        current_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
+        # current_time = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        print(current_time)
+        return current_time
+
+    def get_file_path(self):
+        '''获取文件路径'''
+        self.file_path = os.path.abspath(os.path.dirname(__file__))
+        return self.file_path
+
 if __name__ == '__main__':
-    AndroidTools().install_package()
-    # AndroidTools().installed_package_list()
+
+    AndroidTools().get_screenshot()

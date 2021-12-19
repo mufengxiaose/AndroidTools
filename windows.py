@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import tkinter as tk
 from tkinter import ttk
 from windowFun import AndroidTools
 
+file_path = os.path.abspath(os.path.dirname(__file__))
+dirpath = '/Data/'
+if not os.path.exists(file_path + dirpath):
+    os.mkdir(file_path + dirpath)
+    os.mkdir(file_path + dirpath + "/screenshot")
+    os.mkdir(file_path + dirpath + "/log")
+    os.mkdir(file_path + dirpath + "/screenrecord")
 
 def device_status():
     device_info.delete(1.0, tk.END)
@@ -39,7 +47,7 @@ refresh_Btn.grid(column=2, row=0, sticky='W')
 screenshot_frame = ttk.LabelFrame(phone_tab)
 screenshot_frame.grid(column=0, row=1, sticky='NW', padx=8, pady=4)
 
-screenshot_lable = ttk.L
+# screenshot_lable = ttk.L
 
 
 window.mainloop()
